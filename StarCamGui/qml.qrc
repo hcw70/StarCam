@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>StarCam.qml</file>
+        <file>PhotoPreview.qml</file>
+        <file>PhotoCaptureControls.qml</file>
+        <file>CameraButton.qml</file>
+        <file>CameraListButton.qml</file>
+        <file>CameraListPopup.qml</file>
+        <file>Popup.qml</file>
+    </qresource>
+</RCC>
