@@ -7,8 +7,8 @@ Item {
 
     property string text
     property color bordercolor: "white"
-    property color bgcolor: "black"
-    property color bgcolor_pressed: "darkgrey"
+    property color bgcolor: Qt.rgba(0.0, 0.0, 0.0, 0.2)
+    property color bgcolor_pressed: Qt.rgba(0.4, 0.4, 0.4, 0.2)
     property color color: "lightgrey"
 
     width : 144
@@ -20,6 +20,7 @@ Item {
         border.width: 2
         border.color: button.bordercolor
         color:  mouseRegion.containsPress ? button.bgcolor_pressed : button.bgcolor
+
         radius: 10
     }
 
@@ -36,6 +37,7 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
+        wrapMode: Text.WordWrap
         color: button.color
         font.bold: true
         style: Text.Raised

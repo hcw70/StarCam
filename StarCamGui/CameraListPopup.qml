@@ -60,6 +60,8 @@ Popup {
     property int itemWidth : 200
     property int itemHeight : 50
 
+    color: Qt.rgba(0.4, 0.4, 0.4, 0.2);
+
     width: itemWidth + view.anchors.margins*2
     height: view.count * itemHeight + view.anchors.margins*2
 
@@ -71,7 +73,7 @@ Popup {
         anchors.margins: 5
         snapMode: ListView.SnapOneItem
         highlightFollowsCurrentItem: true
-        highlight: Rectangle { color: "gray"; radius: 5 }
+        highlight: Rectangle { color: Qt.rgba(0.4, 0.4, 0.4, 0.5); radius: 5 }
         currentIndex: 0
 
         delegate: CameraButton {

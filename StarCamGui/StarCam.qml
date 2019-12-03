@@ -35,15 +35,20 @@ Rectangle {
                 photoPreview.source = preview
                 stillControls.previewAvailable = true
                 cameraUI.state = "PhotoPreview"
+                console.log("Captured image: " + preview.toString())
             }
+            onImageSaved: {
+                console.log("Saved image: " + path.toString())
+            }
+
+            onErrorStringChanged: {
+                console.log("Got camera error:",errorString)
+            }
+
         }
 
-        videoRecorder {
-             resolution: "640x480"
-             frameRate: 30
-        }
     }
-/*
+
     PhotoPreview {
         id : photoPreview
         anchors.fill : parent
@@ -51,38 +56,41 @@ Rectangle {
         visible: cameraUI.state == "PhotoPreview"
         focus: visible
     }
-*/
-/*    VideoPreview {
-        id : videoPreview
-        anchors.fill : parent
-        onClosed: cameraUI.state = "VideoCapture"
-        visible: cameraUI.state == "VideoPreview"
-        focus: visible
 
-        //don't load recorded video if preview is invisible
-        source: visible ? camera.videoRecorder.actualLocation : ""
-    }
-*/
     VideoOutput {
         id: viewfinder
-        visible: cameraUI.state == "PhotoCapture" || cameraUI.state == "VideoCapture"
+
+        visible: cameraUI.state == "PhotoCapture"
 
         x: 0
         y: 0
-        width: parent.width - stillControls.buttonsPanelWidth
+        width: parent.width
         height: parent.height
 
         source: camera
         autoOrientation: true
+        fillMode: VideoOutput.Stretch
+
+        Rectangle {
+            id: grid
+                color: Qt.rgba(0.0, 0.0, 0.0, 0.0)
+                border.color: Qt.rgba(0.4, 0.4, 0.4, 0.2)
+                width: parent.width / 2;
+                height: parent.height / 2;
+                anchors.centerIn: parent;
+                border.width: 2
+       }
+
     }
 
     PhotoCaptureControls {
         id: stillControls
+
         anchors.fill: parent
         camera: camera
+        videoOutput: viewfinder
         visible: cameraUI.state == "PhotoCapture"
         onPreviewSelected: cameraUI.state = "PhotoPreview"
-        onVideoModeSelected: cameraUI.state = "VideoCapture"
     }
 
 }

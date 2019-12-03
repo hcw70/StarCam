@@ -2,8 +2,11 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtMultimedia 5.12
 
+import Qt.labs.folderlistmodel 2.12
+
 FocusScope {
     property Camera camera
+    property VideoOutput videoOutput
     property bool previewAvailable : false
 
     property int buttonsPanelWidth: buttonPaneShadow.width
@@ -18,7 +21,7 @@ FocusScope {
         height: parent.height
         anchors.top: parent.top
         anchors.right: parent.right
-        color: Qt.rgba(0.08, 0.08, 0.08, 1)
+        color: Qt.rgba(0.08, 0.08, 0.08, 0.1)
 
         Column {
             anchors {
@@ -92,8 +95,56 @@ FocusScope {
             spacing: 8
 
             CameraListButton {
+                id: cameraSelect
                 model: QtMultimedia.availableCameras
-                onValueChanged: captureControls.camera.deviceId = value
+                onValueChanged:
+                {
+                    console.log("Got: " , value)
+                    captureControls.camera.deviceId = value
+                    videoPlayer.stop()
+                    camera.stop()
+                    videoOutput.source = camera
+                    camera.start()
+                }
+            }
+
+            ComboBox {
+                id: videoSelect
+                model: videoFolderModel
+
+                width : 144
+                height: 70
+                textRole: 'fileName'
+                background: Rectangle {
+                     radius: 10
+                     color: Qt.rgba(0.0, 0.0, 0.0, 0.2)
+                }
+                onActivated:
+                {
+                    console.log("Got: " , index, " ", currentText)
+                    videoPlayer.stop()
+                    camera.stop()
+                    videoPlayer.source = videoFolderModel.folder + "/" + currentText
+                    videoOutput.source = videoPlayer
+                    videoPlayer.play()
+                }
+            }
+            MediaPlayer {
+                id: videoPlayer
+                loops: 100
+            }
+
+            FolderListModel {
+                id: videoFolderModel
+                folder: "file:///home/hcw/work/Priv/StarCam/TestVideos"
+                caseSensitive: false
+                nameFilters: ["*.mp4", "*.mkv"]
+                onStatusChanged:
+                {
+                    console.log("Folder: " + folder)
+                    videoSelect.currentIndex = 0
+                }
+
             }
 
         }
