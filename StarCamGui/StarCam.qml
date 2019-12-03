@@ -69,7 +69,7 @@ Rectangle {
 
         source: camera
         autoOrientation: true
-        fillMode: VideoOutput.Stretch
+        fillMode: VideoOutput.PreserveAspectCrop
 
         Rectangle {
             id: grid
