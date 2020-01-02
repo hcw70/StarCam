@@ -1,12 +1,18 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
+#include <QuickFlux>
+
+#include <QtMultimedia/QCamera>
+#include <QtMultimedia/QDeclarativeCamera>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
+    registerQuickFluxQmlTypes();
 
     QQuickView view;
     view.setResizeMode(QQuickView::SizeRootObjectToView);

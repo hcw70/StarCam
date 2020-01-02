@@ -126,6 +126,7 @@ FocusScope {
                     camera.stop()
                     videoPlayer.source = videoFolderModel.folder + "/" + currentText
                     videoOutput.source = videoPlayer
+                    videoPlayer.loops = MediaPlayer.Infinite
                     videoPlayer.play()
                 }
             }

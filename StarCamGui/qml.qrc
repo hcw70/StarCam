@@ -7,5 +7,14 @@
         <file>CameraListButton.qml</file>
         <file>CameraListPopup.qml</file>
         <file>Popup.qml</file>
+        <file>actions/qmldir</file>
+        <file>actions/ActionTypes.qml</file>
+        <file>actions/AppActions.qml</file>
+        <file>stores/qmldir</file>
+        <file>stores/CamStore.qml</file>
+        <file>stores/UserPrefsStore.qml</file>
+        <file>stores/RootStore.qml</file>
+        <file>stores/MainStore.qml</file>
     </qresource>
+    <qresource prefix="/actions"/>
 </RCC>
