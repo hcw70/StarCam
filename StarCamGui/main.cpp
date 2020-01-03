@@ -4,13 +4,27 @@
 #include <QuickFlux>
 
 #include <QtMultimedia/QCamera>
-#include <QtMultimedia/QDeclarativeCamera>
+
+#include <QQmlEngine>
+#include <QQmlComponent>
+
+#include "qdeclarativecamera/qdeclarativecamera_plugin.h"
+
+void initializeEngine(QQmlEngine *engine, const char *uri)
+{
+    Q_UNUSED(uri);
+//    engine->addImageProvider("camera", new QDeclarativeCameraPreviewProvider);
+}
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
+    QDeclarativeCameraPlugin p;
+    p.registerTypes("org.hwintjen");
 
     registerQuickFluxQmlTypes();
 

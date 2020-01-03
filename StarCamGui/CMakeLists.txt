@@ -8,7 +8,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick Multimedia REQUIRED)
 
 include(ExternalProject)
 
@@ -29,10 +29,12 @@ include_directories("${PROJECT_BINARY_DIR}/QuickFlux/include/quickflux")
 
 ## QuickFlux
 ###################
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_BINARY_DIR}/QuickFlux-build/src/")
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_BINARY_DIR}/QuickFlux-build/src/;${CMAKE_SOURCE_DIR}/qdeclarativecamera")
 
+
+add_subdirectory(qdeclarativecamera)
 
 add_executable(${PROJECT_NAME} "main.cpp" "qml.qrc")
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Quick quickfluxd)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Quick Qt5::Multimedia quickfluxd qdeclarativecamera)
 add_dependencies(${PROJECT_NAME} QuickFlux)

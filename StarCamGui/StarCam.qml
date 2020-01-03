@@ -1,6 +1,8 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtMultimedia 5.12
+import org.hwintjen 5.0
+//import qdeclarativecamera 5.0
 
 Rectangle {
     id : cameraUI
@@ -26,9 +28,10 @@ Rectangle {
         }
     ]
 
-    Camera {
+    QCamera {
         id: camera
         captureMode: Camera.CaptureStillImage
+
 
         imageCapture {
             onImageCaptured: {
