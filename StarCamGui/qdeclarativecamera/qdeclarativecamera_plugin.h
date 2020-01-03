@@ -6,7 +6,7 @@
 class QDeclarativeCameraPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.hwintjen.qdeclarativecamera")
+    Q_PLUGIN_METADATA(IID "org.hwintjen")
 
 public:
     void registerTypes(const char *uri);

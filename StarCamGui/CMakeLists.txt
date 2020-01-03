@@ -29,7 +29,12 @@ include_directories("${PROJECT_BINARY_DIR}/QuickFlux/include/quickflux")
 
 ## QuickFlux
 ###################
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_BINARY_DIR}/QuickFlux-build/src/;${CMAKE_SOURCE_DIR}/qdeclarativecamera")
+
+list(APPEND QML_DIRS ${PROJECT_BINARY_DIR}/QuickFlux/)
+list(APPEND QML_DIRS "${CMAKE_CURRENT_BINARY_DIR}/QuickFlux-build/src/QuickFlux-build")
+list(APPEND QML_DIRS "${CMAKE_SOURCE_DIR}/qdeclarativecamera")
+
+set(QML_IMPORT_PATH "${QML_DIRS}" CACHE STRING "Qt Creator 4.1 extra qml import paths" FORCE)
 
 
 add_subdirectory(qdeclarativecamera)
